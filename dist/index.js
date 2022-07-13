@@ -51021,14 +51021,12 @@ async function touch(pullRequest, jiraInfo) {
 			"jira-ticket",
 			pullRequest,
 			jiraInfo.pass,
-			url,
 			jiraInfo.description
 		),
 		_src_github_status_js__WEBPACK_IMPORTED_MODULE_3__/* .createStatus */ .mk(
 			"single-commit",
 			pullRequest,
 			multiCommitPass,
-			url,
 			multiCommitMessage
 		),
 	];
@@ -51088,7 +51086,7 @@ async function getAuthenticatedOctokitClient(token) {
 	});
 }
 
-async function createStatus(statusid, pullRequest, pass, targetUrl, description) {
+async function createStatus(statusid, pullRequest, pass, description) {
 	// TODO: Is it possible that pullRequest.base is different from the repository hosting the pull request?
 	const owner = pullRequest.base.repo.owner.login;
 	const repo = pullRequest.base.repo.name;
@@ -51100,7 +51098,6 @@ async function createStatus(statusid, pullRequest, pass, targetUrl, description)
 		repo,
 		sha,
 		state: state,
-		target_url: targetUrl,
 		// See issue #7: descriptions are limited to 140 characters
 		description: description.substr(0, 130),
 		context: statusid

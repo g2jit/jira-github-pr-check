@@ -153,14 +153,12 @@ async function touch(pullRequest, jiraInfo) {
 			"jira-ticket",
 			pullRequest,
 			jiraInfo.pass,
-			url,
 			jiraInfo.description
 		),
 		githubApi.createStatus(
 			"single-commit",
 			pullRequest,
 			multiCommitPass,
-			url,
 			multiCommitMessage
 		),
 	];
