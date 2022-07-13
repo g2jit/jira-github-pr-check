@@ -3,4 +3,4 @@ author: "Alex Palmer"
 description: "Validates a PR against a JIRA ticket."
 runs:
   using: "node16"
-  main: "dist/app.mjs"
+  main: "dist/index.mjs"
