@@ -12,7 +12,9 @@ const JIRA_COMMIT_PATTERN = /^([A-Z]+-\d+)\u0020\w/;
 const PR_BODY_VAR_PATTERN = /^([A-Z_]+)=(.*?)(\s*#.*)?$/gm;
 
 function parseMessage(message) {
+	console.log(message);
 	const match = JIRA_COMMIT_PATTERN.exec(message);
+	console.log(match);
 	if (!match) {
 		return null;
 	}
@@ -163,7 +165,6 @@ async function touch(pullRequest, jiraInfo) {
 
 try {
 	const pullRequest = context.payload;
-	console.log(pullRequest);
 	const jiraInfo = await getJiraInfo(pullRequest);
 	await touch(pullRequest, jiraInfo);
 } catch (error) {
