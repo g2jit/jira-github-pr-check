@@ -35,7 +35,7 @@ async function createStatus(statusid, pullRequest, pass, description) {
 		context: statusid
 	};
 	const client = await getAuthenticatedOctokitClient();
-	await client.repos.createStatus(data);
+	await client.repos.createCommitStatus(data);
 }
 
 async function getPullRequest(params) {
