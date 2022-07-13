@@ -51022,13 +51022,7 @@ async function touch(pullRequest, jiraInfo) {
 			pullRequest,
 			jiraInfo.pass,
 			jiraInfo.description
-		),
-		_src_github_status_js__WEBPACK_IMPORTED_MODULE_3__/* .createStatus */ .mk(
-			"single-commit",
-			pullRequest,
-			multiCommitPass,
-			multiCommitMessage
-		),
+		)
 	];
 	if (jiraInfo.isMaintMerge) {
 		promises.push(

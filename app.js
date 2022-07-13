@@ -154,13 +154,7 @@ async function touch(pullRequest, jiraInfo) {
 			pullRequest,
 			jiraInfo.pass,
 			jiraInfo.description
-		),
-		githubApi.createStatus(
-			"single-commit",
-			pullRequest,
-			multiCommitPass,
-			multiCommitMessage
-		),
+		)
 	];
 	if (jiraInfo.isMaintMerge) {
 		promises.push(
