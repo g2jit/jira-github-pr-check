@@ -51031,6 +51031,7 @@ async function touch(pullRequest, jiraInfo) {
 
 try {
 	const pullRequest = _actions_github__WEBPACK_IMPORTED_MODULE_1__.context.payload;
+	console.log(pullRequest);
 	const jiraInfo = await getJiraInfo(pullRequest);
 	await touch(pullRequest, jiraInfo);
 } catch (error) {
