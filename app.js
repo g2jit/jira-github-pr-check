@@ -1,10 +1,12 @@
 // © 2016 and later: Unicode, Inc. and others.
 // License & terms of use: http://www.unicode.org/copyright.html#License
 
-import * as githubApi from "./src/github-status";
+"use strict";
+
+import * as githubApi from "./src/github-status.js";
 import { setFailed } from "@actions/core";
 import { context } from "@actions/github";
-import * as jira from "./src/jira-status";
+import * as jira from "./src/jira-status.js";
 
 const JIRA_COMMIT_PATTERN = /^([A-Z]+-\d+)\u0020\w/;
 const PR_BODY_VAR_PATTERN = /^([A-Z_]+)=(.*?)(\s*#.*)?$/gm;

@@ -3,16 +3,14 @@
 
 "use strict";
 
-const Octokit = require("@octokit/rest");
+import { Octokit } from "@octokit/rest";
 
 async function getAuthenticatedOctokitClient(token) {
 	if (!token) {
 		if (process.env.GITHUB_TOKEN) {
 			token = process.env.GITHUB_TOKEN;
-		} else if (process.env.GITHUB_APP_ID) {
-			token = await require("./github-token").getNewToken();
 		} else {
-			throw new Error("Need either GITHUB_TOKEN or GITHUB_APP_ID");
+			throw new Error("Need GITHUB_TOKEN");
 		}
 	}
 	return new Octokit({
@@ -117,7 +115,7 @@ async function writeBranch(githubToken, params) {
 	return refData.data;
 }
 
-module.exports = {
+export {
 	createStatus,
 	getPullRequest,
 	getCommitDiff,

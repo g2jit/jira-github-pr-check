@@ -2,10 +2,11 @@
 // License & terms of use: http://www.unicode.org/copyright.html#License
 
 "use strict";
+import JiraClient from "jira-connector";
 
 let jira;
 if (process.env.JIRA_USERNAME && process.env.JIRA_PASSWORD) {
-	jira = new (require("jira-connector"))({
+	jira = new JiraClient({
 		host: process.env.JIRA_URL,
 		basic_auth: {
 			username: process.env.JIRA_USERNAME,
@@ -13,7 +14,7 @@ if (process.env.JIRA_USERNAME && process.env.JIRA_PASSWORD) {
 		}
 	});
 } else {
-	jira = new (require("jira-connector"))({
+	jira = new JiraClient({
 		host: process.env.JIRA_URL,
 	});
 }
@@ -40,7 +41,7 @@ function getUrl(issueKey) {
 	return "https://" + process.env.JIRA_URL + "/browse/" + issueKey;
 }
 
-module.exports = {
+export {
 	getStatus,
 	getUrl
 };
