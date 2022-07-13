@@ -56,6 +56,8 @@ async function getJiraInfo(pullRequest) {
 		}),
 	]);
 	const jiraStatus = jiraIssue && jiraIssue.fields.status.name;
+	const jiraSummary = jiraIssue && jiraIssue.fields.summary;
+	const numCommits = commits.length;
 	const isMaintMerge =
 		(pullRequest.base.ref === "master" || pullRequest.base.ref === "main") &&
 		pullRequest.head.ref.match(/^maint\//) &&
@@ -67,12 +69,14 @@ async function getJiraInfo(pullRequest) {
 		jiraStatus !== "Reviewing" &&
 		jiraStatus !== "Review Feedback"
 	) {
-		setFailed(jiraStatus === null
-			? "Jira ticket " + issueKey + " not found"
-			: "Jira ticket " +
-			  issueKey +
-			  " is not accepted; it has status " +
-			  jiraStatus)
+		setFailed(
+			jiraStatus === null
+				? "Jira ticket " + issueKey + " not found"
+				: "Jira ticket " +
+						issueKey +
+						" is not accepted; it has status " +
+						jiraStatus
+		);
 		return;
 	}
 
@@ -80,16 +84,20 @@ async function getJiraInfo(pullRequest) {
 	for (const commitInfo of commits) {
 		const commitIssueKey = parseMessage(commitInfo.commit.message);
 		if (commitIssueKey === null) {
-			setFailed("Commit message for " +
-			commitInfo.sha.substr(0, 7) +
-			" fails validation");
+			setFailed(
+				"Commit message for " +
+					commitInfo.sha.substr(0, 7) +
+					" fails validation"
+			);
 			return;
 		} else if (
 			commitIssueKey !== issueKey &&
 			!prFlags["DISABLE_JIRA_ISSUE_MATCH"] &&
 			!isMaintMerge
 		) {
-			setFailed("Please fix your commit messages to have the same ticket number as the pull request. If the inconsistency is intentional, you can disable this warning with DISABLE_JIRA_ISSUE_MATCH=true in the PR description.");
+			setFailed(
+				"Please fix your commit messages to have the same ticket number as the pull request. If the inconsistency is intentional, you can disable this warning with DISABLE_JIRA_ISSUE_MATCH=true in the PR description."
+			);
 			return;
 		}
 	}
@@ -101,6 +109,15 @@ async function getJiraInfo(pullRequest) {
 	}
 
 	// All checks passed
+	return {
+		issueKey,
+		jiraStatus,
+		numCommits,
+		isMaintMerge,
+		prFlags,
+		pass: true,
+		description: issueKey + " \u201C" + jiraSummary + "\u201D",
+	};
 }
 
 const DO_NOT_TOUCH_REPOS = (process.env.DO_NOT_TOUCH_REPOS || "").split(",");
