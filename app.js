@@ -163,6 +163,7 @@ async function touch(pullRequest, jiraInfo) {
 
 try {
 	const pullRequest = context.payload;
+	console.log(pullRequest);
 	const jiraInfo = await getJiraInfo(pullRequest);
 	await touch(pullRequest, jiraInfo);
 } catch (error) {
