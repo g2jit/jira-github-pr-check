@@ -8,7 +8,7 @@ import { setFailed } from "@actions/core";
 import { context } from "@actions/github";
 import * as jira from "./src/jira-status.js";
 
-const JIRA_COMMIT_PATTERN = /^([A-Z]+-\d+)\u0020\w/;
+const JIRA_COMMIT_PATTERN = /^[a-zA-z]+\/([A-Z]+-\d+)\u0020\w/;
 const PR_BODY_VAR_PATTERN = /^([A-Z_]+)=(.*?)(\s*#.*)?$/gm;
 
 function parseMessage(message) {

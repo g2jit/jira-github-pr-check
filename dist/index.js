@@ -50876,7 +50876,7 @@ __nccwpck_require__.a(__webpack_module__, async (__webpack_handle_async_dependen
 
 
 
-const JIRA_COMMIT_PATTERN = /^([A-Z]+-\d+)\u0020\w/;
+const JIRA_COMMIT_PATTERN = /^[a-zA-z]+\/([A-Z]+-\d+)\u0020\w/;
 const PR_BODY_VAR_PATTERN = /^([A-Z_]+)=(.*?)(\s*#.*)?$/gm;
 
 function parseMessage(message) {
